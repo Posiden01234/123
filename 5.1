@@ -1,0 +1,51 @@
+#include <iostream>
+#include <fstream> 
+#include <string> 
+using namespace std;
+
+main()
+{
+  string* Arr;
+  int count;
+  string a;
+  char buf[80];
+
+     ifstream in("count.txt");  
+    if (in.is_open())
+    { 
+      in >> count; 
+    } 
+ in.close();      
+cout << "count = "<< count<<'\n';
+  Arr = new string[count];  
+  ofstream fout("gg.txt"); 
+     ofstream out;          
+   cout << "Enter strings:\n";
+  cin.ignore(400, '\n');
+
+  for (int i = 0; i < count; i++)  
+  { cout << "> ";
+    cin.getline(buf, 80, '\n');
+    Arr[i] = buf;
+  }
+  out.open("gg.txt");  
+    if (out.is_open()) 
+    { 
+       out << "\nArray:" << endl;
+      for (int i = 0; i < count; i++)
+        out << "Arr[" << i << "] = " << Arr[i] << endl;
+      for (int i=0; i<count-1;i++) 
+        for (int j=i; j>=0;j--)
+          if (Arr[j] > Arr[j + 1])
+          {  
+            a = Arr[j];
+            Arr[j] = Arr[j + 1];
+            Arr[j + 1] = a; 
+          }
+      out << "\nSorted array:\n"; 
+      for (int i = 0; i < count; i++)
+        out << "Arr[" << i << "] = " << Arr[i] << endl;
+    } 
+    cout << "####uspeh####" ; 
+  delete[] Arr;
+}
